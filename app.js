@@ -8,7 +8,7 @@ const app = Vue.createApp({
       healCount: 0,
       playable: true,
       message: "",
-      turnCount: 1
+      turnCount: 1,
     };
   },
 
@@ -42,13 +42,17 @@ const app = Vue.createApp({
       this.checkPlayable();
 
       //logging the attack history
-      const turnLog = "Lượt " + this.turnCount 
-      this.battleLog.push(turnLog)
-      const playerLog = "Bạn tấn công và gây ra " + playerAttackDMG + " damage cho Quái Vật";
+      const turnLog = "Lượt " + this.turnCount;
+      this.battleLog.push(turnLog);
+      const playerLog =
+        "Bạn tấn công và gây ra " + playerAttackDMG + " damage cho Quái Vật";
       this.battleLog.push(playerLog);
-      const monsterLog = "Quái Vật tấn công lại và gây ra " + monsterAttackDMG + " damage tới Người Chơi";
+      const monsterLog =
+        "Quái Vật tấn công lại và gây ra " +
+        monsterAttackDMG +
+        " damage tới Người Chơi";
       this.battleLog.push(monsterLog);
-      
+
       //increase turnCount
       this.turnCount++;
     },
@@ -66,8 +70,8 @@ const app = Vue.createApp({
       this.checkPlayable();
 
       //logging the attack history
-      const turnLog = "Lượt " + this.turnCount 
-      this.battleLog.push(turnLog)
+      const turnLog = "Lượt " + this.turnCount;
+      this.battleLog.push(turnLog);
       const playerLog =
         "Bạn sử dụng CHIÊU ĐẶC BIỆT và gây ra " +
         playerSpecialATK +
@@ -86,12 +90,13 @@ const app = Vue.createApp({
       this.specialAttackCount++;
 
       //warn player that special attack is no longer available
-      if(this.specialAttackCount === 3) {
-        alert("Sau lượt này, bạn sẽ không thể sử dụng CHIÊU ĐẶC BIỆT được nữa.");
+      if (this.specialAttackCount === 3) {
+        alert(
+          "Sau lượt này, bạn sẽ không thể sử dụng CHIÊU ĐẶC BIỆT được nữa."
+        );
       }
     },
     heal() {
-
       //create heal value for player & monster (from 1 -> 6 health)
       const playerHealPoint = this.getRandomValue(1, 6);
       const monsterHealPoint = this.getRandomValue(1, 6);
@@ -110,21 +115,24 @@ const app = Vue.createApp({
       this.healCount++;
 
       //warn player that heal is not available from now
-      if(this.healCount === 3) {
+      if (this.healCount === 3) {
         alert("Sau lượt này, bạn sẽ không thể hồi máu được nữa.");
       }
     },
     surrender() {
-        this.playerHealth = 0;
-        this.checkPlayable();
+      this.playerHealth = 0;
+      this.checkPlayable();
     },
     checkPlayable() {
       if (this.playerHealth <= 0) {
         this.playable = false;
         this.message = "BẠN ĐÃ THUA";
-    } else if (this.monsterHealth <= 0) {
+      } else if (this.monsterHealth <= 0) {
         this.playable = false;
         this.message = "BẠN ĐÃ THẮNG";
+      } else if (this.playerHealth <= 0 && this.monsterHealth <= 0){
+        this.playable = false;
+        this.message = "HOÀ";
       }
     },
     restartGame() {
