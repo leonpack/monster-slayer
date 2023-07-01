@@ -84,6 +84,11 @@ const app = Vue.createApp({
 
       //limit special attack usage time
       this.specialAttackCount++;
+
+      //warn player that special attack is no longer available
+      if(this.specialAttackCount === 3) {
+        alert("Sau lượt này, bạn sẽ không thể sử dụng CHIÊU ĐẶC BIỆT được nữa.");
+      }
     },
     heal() {
 
@@ -103,6 +108,11 @@ const app = Vue.createApp({
 
       //limit healing usage time
       this.healCount++;
+
+      //warn player that heal is not available from now
+      if(this.healCount === 3) {
+        alert("Sau lượt này, bạn sẽ không thể hồi máu được nữa.");
+      }
     },
     surrender() {
         this.playerHealth = 0;
