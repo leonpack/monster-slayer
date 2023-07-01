@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <marquee behavior="" direction="left" ><h1>Dũng Sĩ Diệt Quái</h1></marquee>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Máu của Quái Vật</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterHealthValue"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Máu của Người Chơi</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerHealthValue"></div>
+        </div>
+      </section>
+      <section v-if="playable===true" id="controls">
+        <button v-if="playerHealth>0 || monsterHealth>0" @click="attack">ĐÁNH THƯỜNG</button>
+        <!-- Special attack limit use: 3 times -->
+        <button v-if="(playerHealth>0 || monsterHealth>0) && specialAttackCount<3" @click="specialAttack" >CHIÊU ĐẶC BIỆT</button>
+        <button v-if="(playerHealth>0 || monsterHealth>0) && healCount<3" @click="heal">HỒI MÁU</button>
+        <button @click="surrender">ĐẦU HÀNG</button>
+      </section>
+
+      <!-- This section only show up if the game is finish or the player surrender -->
+      <section v-if="playable===false" id="result" class="container">
+        <h1> {{ message }} </h1>
+        <button  @click="restartGame" >CHƠI LẠI ?</button>
+      </section>
+
+      <section id="log" class="container">
+        <h2>Lịch Sử Tấn Công</h2>
+        <ul>
+          <li v-for="log in battleLog" :key="log"> {{ log }} </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      Made by <span>Nathan</span> with <span>♥♥♥♥</span>
+    </footer>
+  </body>
+</html>
