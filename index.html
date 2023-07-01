@@ -33,7 +33,7 @@
         <button v-if="playerHealth>0 || monsterHealth>0" @click="attack">ĐÁNH THƯỜNG</button>
         <!-- Special attack limit use: 3 times -->
         <button v-if="(playerHealth>0 || monsterHealth>0) && specialAttackCount<3" @click="specialAttack" >CHIÊU ĐẶC BIỆT</button>
-        <button v-if="(playerHealth>0 || monsterHealth>0) && healCount<3" @click="heal">HỒI MÁU</button>
+        <button v-if="(playerHealth>0 || monsterHealth>0) && healCount<3 && (playerHealth<70 && monsterHealth < 70 )" @click="heal">HỒI MÁU</button>
         <button @click="surrender">ĐẦU HÀNG</button>
       </section>
 

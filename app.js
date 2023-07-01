@@ -8,6 +8,7 @@ const app = Vue.createApp({
       healCount: 0,
       playable: true,
       message: "",
+      turnCount: 1
     };
   },
 
@@ -41,10 +42,15 @@ const app = Vue.createApp({
       this.checkPlayable();
 
       //logging the attack history
+      const turnLog = "Lượt " + this.turnCount 
+      this.battleLog.push(turnLog)
       const playerLog = "Bạn tấn công và gây ra " + playerAttackDMG + " damage cho Quái Vật";
       this.battleLog.push(playerLog);
       const monsterLog = "Quái Vật tấn công lại và gây ra " + monsterAttackDMG + " damage tới Người Chơi";
       this.battleLog.push(monsterLog);
+      
+      //increase turnCount
+      this.turnCount++;
     },
     specialAttack() {
       this.checkPlayable;
@@ -60,6 +66,8 @@ const app = Vue.createApp({
       this.checkPlayable();
 
       //logging the attack history
+      const turnLog = "Lượt " + this.turnCount 
+      this.battleLog.push(turnLog)
       const playerLog =
         "Bạn sử dụng CHIÊU ĐẶC BIỆT và gây ra " +
         playerSpecialATK +
@@ -70,6 +78,9 @@ const app = Vue.createApp({
         monsterSpecialATK +
         " damage tới Người Chơi";
       this.battleLog.push(monsterLog);
+
+      //increase turn count
+      this.turnCount++;
 
       //limit special attack usage time
       this.specialAttackCount++;
@@ -115,6 +126,7 @@ const app = Vue.createApp({
       this.specialAttackCount = 0;
       this.message = "";
       this.battleLog = [];
+      this.turnCount = 1;
     },
   },
 });
