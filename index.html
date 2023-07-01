@@ -30,28 +30,41 @@
         </div>
       </section>
       <section v-if="playable===true" id="controls">
-        <button v-if="playerHealth>0 || monsterHealth>0" @click="attack">ĐÁNH THƯỜNG</button>
+        <button v-if="playerHealth>0 || monsterHealth>0" @click="attack">
+          ĐÁNH THƯỜNG
+        </button>
         <!-- Special attack limit use: 3 times -->
-        <button v-if="(playerHealth>0 || monsterHealth>0) && specialAttackCount<3" @click="specialAttack" >CHIÊU ĐẶC BIỆT</button>
-        <button v-if="(playerHealth>0 || monsterHealth>0) && healCount<3 && (playerHealth<70 && monsterHealth < 70 )" @click="heal">HỒI MÁU</button>
+        <button
+          v-if="(playerHealth>0 || monsterHealth>0) && specialAttackCount<3"
+          @click="specialAttack"
+        >
+          CHIÊU ĐẶC BIỆT
+        </button>
+        <button
+          v-if="(playerHealth>0 || monsterHealth>0) && healCount<3 && (playerHealth<70 && monsterHealth < 70 )"
+          @click="heal"
+        >
+          HỒI MÁU
+        </button>
         <button @click="surrender">ĐẦU HÀNG</button>
       </section>
 
       <!-- This section only show up if the game is finish or the player surrender -->
       <section v-if="playable===false" id="result" class="container">
-        <h1> {{ message }} </h1>
-        <button  @click="restartGame" >CHƠI LẠI ?</button>
+        <h1>{{ message }}</h1>
+        <button @click="restartGame">CHƠI LẠI ?</button>
       </section>
 
       <section id="log" class="container">
-        <h2>Lịch Sử Tấn Công</h2>
-        <ul>
-          <li v-for="log in battleLog" :key="log"> {{ log }} </li>
-        </ul>
+        <!-- <h2>Lịch Sử Tấn Công</h2> -->
+        <details open>
+          <summary><h2>Lịch Sử Tấn Công</h2></summary>
+          <ul>
+            <li v-for="log in battleLog" :key="log">{{ log }}</li>
+          </ul>
+        </details>
       </section>
     </div>
-    <footer>
-      Made by <span>Nathan</span> with <span>♥♥♥♥</span>
-    </footer>
+    <footer>Made by <span>Nathan</span> with <span>♥♥♥♥</span></footer>
   </body>
 </html>
